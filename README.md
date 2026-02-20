@@ -6,24 +6,65 @@ Works on **Linux**, **macOS**, and **Windows**. Single binary, no runtime needed
 
 ## Install
 
-Download the binary from [Releases](https://github.com/tbit-io/whisper-paste/releases) and put it in your PATH.
+### Quick install (curl)
 
-Or build from source:
+**macOS (Apple Silicon):**
+```sh
+curl -fsSL https://github.com/tbit-io/whisper-paste/releases/latest/download/whisper-paste-macos-aarch64 -o whisper-paste \
+  && chmod +x whisper-paste && sudo mv whisper-paste /usr/local/bin/
+```
+
+**macOS (Intel):**
+```sh
+curl -fsSL https://github.com/tbit-io/whisper-paste/releases/latest/download/whisper-paste-macos-x86_64 -o whisper-paste \
+  && chmod +x whisper-paste && sudo mv whisper-paste /usr/local/bin/
+```
+
+**Linux (x86_64):**
+```sh
+curl -fsSL https://github.com/tbit-io/whisper-paste/releases/latest/download/whisper-paste-linux-x86_64 -o whisper-paste \
+  && chmod +x whisper-paste && sudo mv whisper-paste /usr/local/bin/
+```
+
+**Linux (aarch64):**
+```sh
+curl -fsSL https://github.com/tbit-io/whisper-paste/releases/latest/download/whisper-paste-linux-aarch64 -o whisper-paste \
+  && chmod +x whisper-paste && sudo mv whisper-paste /usr/local/bin/
+```
+
+**Windows (PowerShell):**
+```powershell
+Invoke-WebRequest -Uri https://github.com/tbit-io/whisper-paste/releases/latest/download/whisper-paste-windows-x86_64.exe -OutFile whisper-paste.exe
+```
+
+### Quick install (wget)
 
 ```sh
+wget -qO whisper-paste https://github.com/tbit-io/whisper-paste/releases/latest/download/whisper-paste-linux-x86_64 \
+  && chmod +x whisper-paste && sudo mv whisper-paste /usr/local/bin/
+```
+
+### From source
+
+```sh
+git clone https://github.com/tbit-io/whisper-paste.git
+cd whisper-paste
 cargo install --path .
+```
+
+### From crates.io (coming soon)
+
+```sh
+cargo install whisper-paste
 ```
 
 ## Quick start
 
 ```sh
-# Interactive setup — prompts for your OpenAI API key
+# 1. Set up your OpenAI API key
 whisper-paste --setup
 
-# Or set the key directly
-whisper-paste --api-key sk-your-key-here
-
-# Start
+# 2. Start
 whisper-paste
 ```
 
@@ -65,8 +106,19 @@ whisper-paste --help       Show help
 ## Platform notes
 
 - **macOS**: Grant microphone + accessibility permissions to the terminal/binary
-- **Linux**: Needs ALSA (`libasound2-dev`) or PulseAudio dev libs to build
+- **Linux**: Needs ALSA (`libasound2-dev`) or PulseAudio dev libs to build. Needs `xdotool` (X11) or `ydotool` (Wayland) for auto-paste
 - **Windows**: Works out of the box
+
+## Contributing
+
+```sh
+git clone https://github.com/tbit-io/whisper-paste.git
+cd whisper-paste
+cargo build
+cargo test
+```
+
+See [CLAUDE.md](CLAUDE.md) for architecture details, lessons learned, and development context.
 
 ## License
 
